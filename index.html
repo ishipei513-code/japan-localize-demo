@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローカライズ比較デモ — Bloom Coffee EN ↔ JA</title>
+  <meta name="description" content="英語カフェサイトと日本語ローカライズ版をスライダーで比較するデモページ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+  <!-- Header Bar -->
+  <header class="demo-header" id="demo-header">
+    <div class="demo-header-inner">
+      <h1 class="demo-title">Localization Compare Demo</h1>
+      <p class="demo-subtitle">Drag the slider to compare English ↔ Japanese</p>
+    </div>
+  </header>
+
+  <!-- Comparison Container -->
+  <div class="compare-wrapper" id="compare-wrapper">
+
+    <!-- English Side (Left) -->
+    <div class="compare-pane compare-pane--left" id="pane-left">
+      <div class="pane-label pane-label--left">
+        <span class="pane-label-flag">🇺🇸</span>
+        <span class="pane-label-text">ENGLISH</span>
+      </div>
+      <iframe src="cafe-en.html" class="compare-iframe" id="iframe-en" title="English Version"></iframe>
+    </div>
+
+    <!-- Japanese Side (Right) -->
+    <div class="compare-pane compare-pane--right" id="pane-right">
+      <div class="pane-label pane-label--right">
+        <span class="pane-label-text">日本語</span>
+        <span class="pane-label-flag">🇯🇵</span>
+      </div>
+      <iframe src="cafe-ja.html" class="compare-iframe" id="iframe-ja" title="Japanese Version"></iframe>
+    </div>
+
+    <!-- Slider Handle -->
+    <div class="slider-handle" id="slider-handle">
+      <div class="slider-line"></div>
+      <div class="slider-knob" id="slider-knob">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M6 10L2 10M14 10L18 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 6L4 10L8 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 6L16 10L12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="slider-line"></div>
+    </div>
+
+  </div>
+
+  <!-- Sync Scroll Toggle -->
+  <div class="controls-bar" id="controls-bar">
+    <label class="toggle-label">
+      <input type="checkbox" id="sync-toggle" checked>
+      <span class="toggle-switch"></span>
+      <span class="toggle-text">スクロール同期</span>
+    </label>
+    <button class="reset-btn" id="reset-btn">中央にリセット</button>
+  </div>
+
+  <script src="demo.js"></script>
+</body>
+</html>
