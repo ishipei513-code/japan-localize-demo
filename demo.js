@@ -82,30 +82,46 @@
 
   // ---- Synchronized Scrolling ----
   function setupScrollSync() {
-    function waitForIframe(iframe, callback) {
-      iframe.addEventListener('load', function () {
-        try {
-          const doc = iframe.contentDocument || iframe.contentWindow.document;
-          callback(iframe.contentWindow, doc);
-        } catch (err) {
-          // Cross-origin - skip sync
+    function waitForIframe(iframe) {
+      return new Promise(function (resolve) {
+        function tryResolve() {
+          try {
+            var doc = iframe.contentDocument || iframe.contentWindow.document;
+            if (doc && doc.readyState === 'complete') {
+              resolve(iframe.contentWindow);
+              return;
+            }
+          } catch (err) {
+            // Cross-origin - skip
+          }
+          // Not ready yet, wait for load event
+          iframe.addEventListener('load', function onLoad() {
+            iframe.removeEventListener('load', onLoad);
+            try {
+              resolve(iframe.contentWindow);
+            } catch (err) { /* cross-origin */ }
+          });
         }
+        tryResolve();
       });
     }
 
-    waitForIframe(iframeEn, function (winEn) {
-      waitForIframe(iframeJa, function (winJa) {
+    Promise.all([waitForIframe(iframeEn), waitForIframe(iframeJa)])
+      .then(function (wins) {
+        var winEn = wins[0];
+        var winJa = wins[1];
+
         winEn.addEventListener('scroll', function () {
           if (!syncScrollEnabled || scrollSyncLock) return;
           scrollSyncLock = true;
 
-          const docEn = winEn.document.documentElement;
-          const maxScrollEn = docEn.scrollHeight - docEn.clientHeight;
+          var docEn = winEn.document.documentElement;
+          var maxScrollEn = docEn.scrollHeight - docEn.clientHeight;
           if (maxScrollEn <= 0) { scrollSyncLock = false; return; }
-          const ratio = winEn.scrollY / maxScrollEn;
+          var ratio = winEn.scrollY / maxScrollEn;
 
-          const docJa = winJa.document.documentElement;
-          const maxScrollJa = docJa.scrollHeight - docJa.clientHeight;
+          var docJa = winJa.document.documentElement;
+          var maxScrollJa = docJa.scrollHeight - docJa.clientHeight;
           winJa.scrollTo({ top: ratio * maxScrollJa });
 
           requestAnimationFrame(function () { scrollSyncLock = false; });
@@ -115,19 +131,18 @@
           if (!syncScrollEnabled || scrollSyncLock) return;
           scrollSyncLock = true;
 
-          const docJa = winJa.document.documentElement;
-          const maxScrollJa = docJa.scrollHeight - docJa.clientHeight;
+          var docJa = winJa.document.documentElement;
+          var maxScrollJa = docJa.scrollHeight - docJa.clientHeight;
           if (maxScrollJa <= 0) { scrollSyncLock = false; return; }
-          const ratio = winJa.scrollY / maxScrollJa;
+          var ratio = winJa.scrollY / maxScrollJa;
 
-          const docEn = winEn.document.documentElement;
-          const maxScrollEn = docEn.scrollHeight - docEn.clientHeight;
+          var docEn = winEn.document.documentElement;
+          var maxScrollEn = docEn.scrollHeight - docEn.clientHeight;
           winEn.scrollTo({ top: ratio * maxScrollEn });
 
           requestAnimationFrame(function () { scrollSyncLock = false; });
         });
       });
-    });
   }
 
   setupScrollSync();
