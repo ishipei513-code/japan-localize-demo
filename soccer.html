@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローカライズ比較デモ — PITCH SUPPLY CO. EN ↔ JA</title>
+  <meta name="description" content="サッカーアパレルブランドサイトの英語版と日本語ローカライズ版をスライダーで比較するデモページ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soccer-styles.css">
+  <link rel="stylesheet" href="demo.css">
+  <style>
+    .demo-header {
+      background: var(--sf-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .demo-title { color: var(--sf-green); font-family: var(--sf-font); }
+    .demo-subtitle { color: var(--sf-gray); font-family: var(--sf-font); }
+    .pane-label {
+      background: rgba(27, 31, 35, 0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--sf-white);
+      font-family: var(--sf-font);
+    }
+    .slider-line {
+      background: linear-gradient(to bottom, transparent, var(--sf-green) 20%, var(--sf-green) 80%, transparent);
+    }
+    .slider-knob {
+      background: var(--sf-dark);
+      border: 3px solid var(--sf-green);
+      color: var(--sf-green);
+      box-shadow: none;
+    }
+    .slider-knob:hover, .slider-handle.dragging .slider-knob {
+      box-shadow: none; background: var(--sf-green); color: var(--sf-dark);
+    }
+    .controls-bar {
+      background: var(--sf-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .reset-btn {
+      border: 2px solid rgba(255,255,255,0.15);
+      color: var(--sf-gray);
+      font-family: var(--sf-font);
+    }
+    .reset-btn:hover { border-color: var(--sf-green); color: var(--sf-green); }
+  </style>
+</head>
+<body>
+
+  <header class="demo-header" id="demo-header">
+    <div class="demo-header-inner">
+      <h1 class="demo-title">Localization Compare Demo</h1>
+      <p class="demo-subtitle">Drag the slider to compare English ↔ Japanese</p>
+    </div>
+  </header>
+
+  <div class="compare-viewport" id="compare-viewport">
+
+    <div class="pane-label pane-label--left" id="label-left">
+      <span class="pane-label-flag">🇺🇸</span>
+      <span class="pane-label-text">ENGLISH</span>
+    </div>
+    <div class="pane-label pane-label--right" id="label-right">
+      <span class="pane-label-text">日本語</span>
+      <span class="pane-label-flag">🇯🇵</span>
+    </div>
+
+    <div class="slider-handle" id="slider-handle">
+      <div class="slider-line"></div>
+      <div class="slider-knob" id="slider-knob">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M6 10L2 10M14 10L18 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8 6L4 10L8 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 6L16 10L12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="slider-line"></div>
+    </div>
+
+    <div class="compare-scroll" id="compare-scroll">
+
+      <!-- ===== ENGLISH LAYER ===== -->
+      <div class="compare-layer compare-layer--en" id="layer-en">
+
+        <nav class="sf-nav">
+          <div class="sf-nav-logo">PITCH SUPPLY CO.</div>
+          <ul class="sf-nav-links">
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#lineup">Lineup</a></li>
+            <li><a href="#info">Info</a></li>
+          </ul>
+        </nav>
+
+        <!-- Hero -->
+        <section class="sf-hero">
+          <div class="sf-hero-left">
+            <div class="sf-hero-badge">⚽ SS26 Drop</div>
+            <h2 class="sf-hero-title">PITCH<br>SUPPLY<br><span class="sf-accent">CO.</span></h2>
+          </div>
+          <div class="sf-hero-right">
+            <p class="sf-hero-sub">
+              Performance meets street. Designed for players
+              who live and breathe football — on and off the pitch.
+              Engineered fabrics. Bold silhouettes. Zero compromise.
+            </p>
+            <div class="sf-hero-meta">
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">🧵</div>
+                <span>Recycled Performance Fabrics</span>
+              </div>
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">🌍</div>
+                <span>Worldwide Free Shipping</span>
+              </div>
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">⚡</div>
+                <span>Limited Edition Drops</span>
+              </div>
+            </div>
+            <a href="#collections" class="sf-hero-cta">Shop Now →</a>
+            <div class="sf-hero-number">26</div>
+          </div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="sf-strip">
+          <div class="sf-strip-inner">
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Match Day</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Training</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Street</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Accessories</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Limited</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Sustainable</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>New Arrivals</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Match Day</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Training</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Street</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Accessories</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Limited</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>Sustainable</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>New Arrivals</span>
+          </div>
+        </div>
+
+        <!-- Collections -->
+        <div class="sf-collections" id="collections">
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">01 — Match Day</p>
+              <h3 class="sf-col-title">Built for<br>the Pitch</h3>
+              <p class="sf-col-desc">
+                Lightweight jerseys, compression shorts, and
+                moisture-wicking socks engineered for 90 minutes
+                of peak performance. Worn by pros, made for everyone.
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">From</span>$45</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-1"><img src="images/matchday-jersey.png" alt="Match Day Jersey"></div>
+          </div>
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">02 — Street</p>
+              <h3 class="sf-col-title">Off-Pitch<br>Culture</h3>
+              <p class="sf-col-desc">
+                Oversized hoodies, graphic tees, and track pants
+                that bridge football culture and streetwear.
+                Designed in Tokyo. Inspired by the beautiful game.
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">From</span>$55</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-2"><img src="images/street-hoodie.png" alt="Street Hoodie"></div>
+          </div>
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">03 — Training</p>
+              <h3 class="sf-col-title">Elevate<br>Your Game</h3>
+              <p class="sf-col-desc">
+                Technical base layers, ventilated drill tops, and
+                4-way stretch joggers. Every piece tested on the
+                training ground before it hits the shelf.
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">From</span>$40</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-3"><img src="images/training-gear.png" alt="Training Gear"></div>
+          </div>
+        </div>
+
+        <!-- Lineup -->
+        <section class="sf-lineup" id="lineup">
+          <div class="sf-lineup-header">
+            <div>
+              <p class="sf-lineup-label">Lineup</p>
+              <h2 class="sf-lineup-title">SS26<br>Best Sellers</h2>
+            </div>
+            <p class="sf-lineup-sub">Spring/Summer 2026 Collection</p>
+          </div>
+          <div class="sf-lineup-grid">
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/matchday-jersey.png" alt="Aero Match Jersey">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Aero Match Jersey</div>
+                <div class="sf-lineup-detail">Ultralight · 4 colors</div>
+                <div class="sf-lineup-price">$65</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/street-hoodie.png" alt="Pitch Hoodie">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Pitch Hoodie</div>
+                <div class="sf-lineup-detail">Oversized fit · Organic cotton</div>
+                <div class="sf-lineup-price">$85</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-shoes.png" alt="Turf Trainer V2">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Turf Trainer V2</div>
+                <div class="sf-lineup-detail">Indoor/outdoor · Recycled sole</div>
+                <div class="sf-lineup-price">$120</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-cap.png" alt="Touchline Cap">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Touchline Cap</div>
+                <div class="sf-lineup-detail">Snapback · One size</div>
+                <div class="sf-lineup-price">$35</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-shorts.png" alt="Flex Training Short">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Flex Training Short</div>
+                <div class="sf-lineup-detail">4-way stretch · Zip pocket</div>
+                <div class="sf-lineup-price">$45</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-socks.png" alt="Grip Socks Pro">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Grip Socks Pro</div>
+                <div class="sf-lineup-detail">Anti-slip · 3-pack</div>
+                <div class="sf-lineup-price">$28</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-bag.png" alt="Kit Bag XL">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Kit Bag XL</div>
+                <div class="sf-lineup-detail">45L · Boot compartment</div>
+                <div class="sf-lineup-price">$75</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-gloves.png" alt="Field Gloves">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">Field Gloves</div>
+                <div class="sf-lineup-detail">Touchscreen · Thermal</div>
+                <div class="sf-lineup-price">$32</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Info -->
+        <section class="sf-info" id="info">
+          <div class="sf-info-inner">
+            <p class="sf-info-label">Info</p>
+            <h2 class="sf-info-title">About the Brand</h2>
+            <div class="sf-info-grid">
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">Founded</p>
+                <p class="sf-info-card-value">Tokyo, 2022<br>By players,<br>for players</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">Materials</p>
+                <p class="sf-info-card-value">80% recycled<br>fabrics across<br>all lines</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">Shipping</p>
+                <p class="sf-info-card-value">Free worldwide<br>3-5 business days<br>Easy returns</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">Contact</p>
+                <p class="sf-info-card-value">hello@pitchsupply.co<br>@pitchsupplyco<br>Tokyo, Japan</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="sf-footer">
+          <div class="sf-footer-logo">PITCH SUPPLY CO.</div>
+          <p class="sf-footer-text">© 2026 Pitch Supply Co. All rights reserved.</p>
+        </footer>
+
+      </div><!-- /layer-en -->
+
+      <!-- ===== JAPANESE LAYER ===== -->
+      <div class="compare-layer compare-layer--ja sf-lang-ja" id="layer-ja">
+
+        <nav class="sf-nav">
+          <div class="sf-nav-logo">ピッチサプライ</div>
+          <ul class="sf-nav-links">
+            <li><a href="#collections">コレクション</a></li>
+            <li><a href="#lineup">ラインナップ</a></li>
+            <li><a href="#info">ブランド情報</a></li>
+          </ul>
+        </nav>
+
+        <!-- Hero -->
+        <section class="sf-hero">
+          <div class="sf-hero-left">
+            <div class="sf-hero-badge">⚽ SS26 新作</div>
+            <h2 class="sf-hero-title">ピッチ<br>サプライ<br><span class="sf-accent">Co.</span></h2>
+          </div>
+          <div class="sf-hero-right">
+            <p class="sf-hero-sub">
+              パフォーマンスとストリートの融合。
+              ピッチの内外でサッカーを生きるプレイヤーのために。
+              高機能素材。大胆なシルエット。妥協なし。
+            </p>
+            <div class="sf-hero-meta">
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">🧵</div>
+                <span>リサイクル高機能ファブリック</span>
+              </div>
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">🌍</div>
+                <span>全世界送料無料</span>
+              </div>
+              <div class="sf-hero-meta-item">
+                <div class="sf-hero-meta-icon">⚡</div>
+                <span>数量限定ドロップ</span>
+              </div>
+            </div>
+            <a href="#collections" class="sf-hero-cta">ショップを見る →</a>
+            <div class="sf-hero-number">26</div>
+          </div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="sf-strip">
+          <div class="sf-strip-inner">
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>マッチデー</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>トレーニング</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>ストリート</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>アクセサリー</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>限定</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>サステナブル</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>新着</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>マッチデー</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>トレーニング</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>ストリート</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>アクセサリー</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>限定</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>サステナブル</span>
+            <span class="sf-strip-item"><span class="sf-strip-dot"></span>新着</span>
+          </div>
+        </div>
+
+        <!-- Collections -->
+        <div class="sf-collections">
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">01 — マッチデー</p>
+              <h3 class="sf-col-title">ピッチの<br>ために</h3>
+              <p class="sf-col-desc">
+                軽量ジャージ、コンプレッションショーツ、
+                吸湿速乾ソックス。90分間のパフォーマンスを
+                最大化する設計。プロ仕様、全員のために。
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">から</span>¥6,800</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-1"><img src="images/matchday-jersey.png" alt="マッチデージャージ"></div>
+          </div>
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">02 — ストリート</p>
+              <h3 class="sf-col-title">ピッチの<br>外でも</h3>
+              <p class="sf-col-desc">
+                オーバーサイズフーディー、グラフィックTシャツ、
+                トラックパンツ。サッカーカルチャーとストリートウェアの
+                融合。東京発、美しきゲームに触発されたデザイン。
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">から</span>¥8,200</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-2"><img src="images/street-hoodie.png" alt="ストリートフーディー"></div>
+          </div>
+          <div class="sf-col-block">
+            <div class="sf-col-text">
+              <p class="sf-col-label">03 — トレーニング</p>
+              <h3 class="sf-col-title">ゲームを<br>進化させろ</h3>
+              <p class="sf-col-desc">
+                テクニカルベースレイヤー、通気性ドリルトップ、
+                4WAYストレッチジョガー。すべてのアイテムが
+                トレーニンググラウンドでテスト済み。
+              </p>
+              <p class="sf-col-price"><span class="sf-price-from">から</span>¥5,900</p>
+            </div>
+            <div class="sf-col-visual sf-col-visual-3"><img src="images/training-gear.png" alt="トレーニングギア"></div>
+          </div>
+        </div>
+
+        <!-- Lineup -->
+        <section class="sf-lineup">
+          <div class="sf-lineup-header">
+            <div>
+              <p class="sf-lineup-label">ラインナップ</p>
+              <h2 class="sf-lineup-title">SS26<br>人気アイテム</h2>
+            </div>
+            <p class="sf-lineup-sub">2026年 春夏コレクション</p>
+          </div>
+          <div class="sf-lineup-grid">
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/matchday-jersey.png" alt="エアロマッチジャージ">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">エアロマッチジャージ</div>
+                <div class="sf-lineup-detail">超軽量 · 4色展開</div>
+                <div class="sf-lineup-price">¥9,800</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/street-hoodie.png" alt="ピッチフーディー">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">ピッチフーディー</div>
+                <div class="sf-lineup-detail">オーバーサイズ · オーガニックコットン</div>
+                <div class="sf-lineup-price">¥12,800</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-shoes.png" alt="ターフトレーナー V2">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">ターフトレーナー V2</div>
+                <div class="sf-lineup-detail">兼用ソール · リサイクル素材</div>
+                <div class="sf-lineup-price">¥18,000</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-cap.png" alt="タッチラインキャップ">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">タッチラインキャップ</div>
+                <div class="sf-lineup-detail">スナップバック · フリーサイズ</div>
+                <div class="sf-lineup-price">¥5,200</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-shorts.png" alt="フレックストレーニングショーツ">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">フレックストレーニングショーツ</div>
+                <div class="sf-lineup-detail">4WAYストレッチ · ジップポケット</div>
+                <div class="sf-lineup-price">¥6,800</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-socks.png" alt="グリップソックス プロ">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">グリップソックス プロ</div>
+                <div class="sf-lineup-detail">滑り止め加工 · 3足セット</div>
+                <div class="sf-lineup-price">¥4,200</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-bag.png" alt="キットバッグ XL">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">キットバッグ XL</div>
+                <div class="sf-lineup-detail">45L · シューズ収納付き</div>
+                <div class="sf-lineup-price">¥11,200</div>
+              </div>
+            </div>
+            <div class="sf-lineup-item">
+              <img class="sf-lineup-img" src="images/product-gloves.png" alt="フィールドグローブ">
+              <div class="sf-lineup-body">
+                <div class="sf-lineup-name">フィールドグローブ</div>
+                <div class="sf-lineup-detail">タッチスクリーン対応 · 防寒</div>
+                <div class="sf-lineup-price">¥4,800</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Info -->
+        <section class="sf-info">
+          <div class="sf-info-inner">
+            <p class="sf-info-label">ブランド情報</p>
+            <h2 class="sf-info-title">ブランドについて</h2>
+            <div class="sf-info-grid">
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">設立</p>
+                <p class="sf-info-card-value">2022年 東京<br>プレイヤーが作る<br>プレイヤーのために</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">素材</p>
+                <p class="sf-info-card-value">全ラインで<br>リサイクル素材<br>80%使用</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">配送</p>
+                <p class="sf-info-card-value">全世界送料無料<br>3〜5営業日でお届け<br>簡単返品対応</p>
+              </div>
+              <div class="sf-info-card">
+                <p class="sf-info-card-label">お問い合わせ</p>
+                <p class="sf-info-card-value">hello@pitchsupply.co<br>@pitchsupplyco<br>東京都渋谷区</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="sf-footer">
+          <div class="sf-footer-logo">ピッチサプライ</div>
+          <p class="sf-footer-text">© 2026 Pitch Supply Co. All rights reserved.</p>
+        </footer>
+
+      </div><!-- /layer-ja -->
+
+    </div><!-- /compare-scroll -->
+
+  </div><!-- /compare-viewport -->
+
+  <div class="controls-bar" id="controls-bar">
+    <button class="reset-btn" id="reset-btn">中央にリセット</button>
+  </div>
+
+  <script src="demo.js"></script>
+</body>
+</html>
+

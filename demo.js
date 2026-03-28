@@ -19,7 +19,7 @@
 
   // ---- Set Slider Position ----
   function setSliderPosition(ratio) {
-    ratio = Math.max(0.05, Math.min(0.95, ratio));
+    ratio = Math.max(0, Math.min(1, ratio));
     currentRatio = ratio;
     document.documentElement.style.setProperty('--slider-pct', (ratio * 100) + '%');
   }
